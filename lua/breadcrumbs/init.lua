@@ -141,8 +141,10 @@ M.get_winbar = function()
     return
   end
 end
-
-M.setup = function()
+M.setup = function(opts)
+  opts = opts or {}
+  local additional_excludes = opts.filetype_exclude or {}
+  M.winbar_filetype_exclude = vim.list_extend(M.winbar_filetype_exclude, additional_excludes)
   vim.api.nvim_create_augroup("_winbar", {})
   vim.api.nvim_create_autocmd({
     "CursorHoldI",
